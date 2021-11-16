@@ -1,0 +1,66 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={simple_node}] (0) at (-3, -8) {0};
+		\node [style={simple_node}] (1) at (-6, -11) {1};
+		\node [style={simple_node}] (2) at (0, -11) {2};
+		\node [style={simple_node}] (3) at (-3, -14) {3};
+		\node [style={simple_node}] (4) at (-3, 1) {4};
+		\node [style={simple_node}] (5) at (-12, -8) {5};
+		\node [style={simple_node}] (6) at (-18, -2) {6};
+		\node [style={simple_node}] (7) at (4.5, 4) {7};
+		\node [style={simple_node}] (8) at (0, 1) {8};
+		\node [style={simple_node}] (9) at (-12, -2) {9};
+		\node [style={simple_node}] (10) at (-15, 4) {10};
+		\node [style={simple_node}] (11) at (-12, 1) {11};
+		\node [style={simple_node}] (12) at (-3, 4) {12};
+		\node [style={simple_node}] (13) at (-15, -5) {13};
+		\node [style={simple_node}] (14) at (-18, 1) {14};
+		\node [style={simple_node}] (15) at (3, 1) {15};
+		\node [style={simple_node}] (16) at (-3, -5) {16};
+		\node [style={simple_node}] (17) at (-6, -8) {17};
+		\node [style={simple_node}] (18) at (0, -8) {18};
+		\node [style={simple_node}] (19) at (-3, -11) {19};
+		\node [style={simple_node}] (20) at (-3, -2) {20};
+		\node [style={simple_node}] (21) at (-12, -10.75) {21};
+		\node [style={simple_node}] (22) at (-18, -5) {22};
+		\node [style={simple_node}] (23) at (6, 1) {23};
+		\node [style={simple_node}] (24) at (0, -2) {24};
+		\node [style={simple_node}] (25) at (-12, -5) {25};
+		\node [style={simple_node}] (26) at (-15, 1) {26};
+		\node [style={simple_node}] (27) at (-9, -2) {27};
+		\node [style={simple_node}] (28) at (-6, 1) {28};
+		\node [style={simple_node}] (29) at (-15, -8) {29};
+		\node [style={simple_node}] (30) at (-15, -2) {30};
+		\node [style={simple_node}] (31) at (3, -2) {31};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={simple_line}] (1) to (17);
+		\draw [style={simple_line}] (2) to (18);
+		\draw [style={simple_line}] (3) to (19);
+		\draw [style={simple_line}] (4) to (12);
+		\draw [style={simple_line}] (5) to (13);
+		\draw [style={simple_line}] (6) to (14);
+		\draw [style={simple_line}] (8) to (12);
+		\draw [style={simple_line}] (9) to (11);
+		\draw [style={simple_line}] (11) to (10);
+		\draw [style={simple_line}] (13) to (9);
+		\draw [style={simple_line}] (14) to (10);
+		\draw [style={simple_line}] (15) to (7);
+		\draw [style={simple_line}] (17) to (16);
+		\draw [style={simple_line}] (18) to (16);
+		\draw [style={simple_line}] (19) to (17);
+		\draw [style={simple_line}] (20) to (4);
+		\draw [style={simple_line}] (21) to (5);
+		\draw [style={simple_line}] (22) to (6);
+		\draw [style={simple_line}] (23) to (7);
+		\draw [style={simple_line}] (24) to (8);
+		\draw [style={simple_line}] (25) to (9);
+		\draw [style={simple_line}] (26) to (10);
+		\draw [style={simple_line}] (27) to (11);
+		\draw [style={simple_line}] (28) to (12);
+		\draw [style={simple_line}] (29) to (13);
+		\draw [style={simple_line}] (30) to (14);
+		\draw [style={simple_line}] (31) to (15);
+		\draw [style={simple_line}] (0) to (16);
+	\end{pgfonlayer}
+\end{tikzpicture}

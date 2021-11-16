@@ -1,0 +1,21 @@
+\newcommand{\fitnessFunction}[1]{
+\centering
+\pgfplotstableread[col sep = comma]{#1}{\table}
+\begin{tikzpicture}
+\begin{axis}[
+title = max\_improvement of x,
+xlabel = {$x$},
+ylabel = {$f(x)$},
+axis lines=left,
+width=15cm,
+height=10cm
+]
+\addplot[black, domain=0:31, forget plot]{x^3-60*x^2+900*x+100};
+\addplot[colorData5, only marks] table [x ={x10}, y = {y10}] {\table};
+\addplot[colorData3, only marks] table [x ={x12}, y = {y12}] {\table};
+\addplot[colorData2, only marks] table [x ={x7}, y = {y7}] {\table};
+\addplot[colorData1, only marks] table [x ={x16}, y = {y16}] {\table};
+\legend{$10$, $12$, $7$, $16$}
+\end{axis}
+\end{tikzpicture}
+}

@@ -1,0 +1,248 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikzit}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{amsfonts} 
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%\algrenewcommand\textproc{}
+
+\input{graphs/style}
+\pgfplotsset{compat=1.15}
+\input{color_scheme}
+\input{data/template}
+\setlength{\parindent}{0pt}
+
+
+\title{Differences of Hill Climbing strategies (First Improvement and Best Improvement) in finding global maximum of a cubic function}
+\author{George Buțco}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+%The most known strategies for Hill Climbing algorithms are First Improvement and Best Improvement.
+In finding global optima, Best Improvement gives the best result in comparison to the other one. Testing these strategies on simple functions is a good way of understanding how they work. In this paper I compare them using the cubic function: $x^3-60x^2+900x+100$ on natural numbers between 0 and 31, showing that Best Improvement is the best strategy for solving this problem.
+\end{abstract}
+
+\section{Introduction}
+"\textbf{Hill climbing} method is an optimization technique that is able to build a search trajectory in the
+search space until reaching the local optima. It only accepts the uphill movement which leads it to
+easily get stuck in local optima."\cite{hillClimbing}
+
+At every iteration of this algorithm, we can choose to go with the first or the best successor bigger than the candidate solution \cite{fibi}.
+
+This choice has a big impact on performance and speed. The Best Improvement strategy gives the best result, but it takes a long time to reach it. First Improvement gives a mediocre average optima but within a short time frame. \cite{HCSA}
+
+Even the endian\cite{endians} of the binary representation can affect the algorithm. 
+
+\subsection{Definitions}
+\begin{itemize}
+    \item
+        Let $f(x)$, a numeric function as follows:
+        \begin{flalign*}
+        f\colon \begin{array}{>{\displaystyle}r @{} >{{}}c<{{}} @{} >{\displaystyle}l} 
+                  \mathbb{Z} &\rightarrow& \mathbb{Z} \\ 
+                  x &\mapsto& f(x)=x^3 - 60x^2 + 900x + 100
+                 \end{array}&&
+        \end{flalign*}
+        
+    \item
+        Let $b_n(x)$, a bijective function that returns the binary representation of x as a boolean array of size $n$
+        
+        $x \in \mathbb{N}$, $x \leq 2^n-1$
+
+        \medskip
+        Example:
+        
+        $b_5(18)$ = [1, 0, 0, 1, 0], for Big Endian.
+        
+        $b_5(18)$ = [0, 1, 0, 0, 1], for Little Endian.
+    
+    \item
+        Let $d(\texttt{b\_array)}$, a bijective function that returns the natural number represented by the binary array given as a parameter
+        
+        \medskip
+        Example:
+        
+        $d(\texttt{[1, 0, 0, 1, 0])} = 18$, for Big Endian
+        
+        $d(\texttt{[0, 1, 0, 0, 1])} = 18$, for Little Endian
+        
+    \item Let first\_improvement($x$) be defined as follows:
+        \begin{algorithm}
+        \caption{First Improvement}\label{alg:cap}
+        \begin{algorithmic}
+        \Require $n \in \mathbb{N}^*$, $x \in \mathbb{N}$
+        \Ensure $x \leq 2^n-1$
+        \Function{first\_improvement}{x}
+            \State $\texttt{b\_array} \gets b_5(x)$
+            \For{$i \gets 1$ to $n$}                    
+                \State $\texttt{candidate} \gets \texttt{b\_array}$
+                \State $\texttt{candidate}[i] = \texttt{candidate}[i] \oplus 1$ \Comment{$\oplus$ is xor operator}
+                \If{$d(\texttt{candidate})$ is better than $x$}
+                    \State \Return d(\texttt{candidate})
+                \EndIf
+            \EndFor
+            \State \Return x
+        \EndFunction
+        \end{algorithmic}
+        \end{algorithm}
+    
+    \newpage
+    \item Let best\_improvement($x$) be defined as follows:
+        \begin{algorithm}
+        \caption{Best Improvement}\label{alg:cap}
+        \begin{algorithmic}
+        \Require $n \in \mathbb{N}^*$, $x \in \mathbb{N}$
+        \Ensure $x \leq 2^n-1$
+        \Function{best\_improvement}{x}
+            \State $rv \gets x$
+            \State $\texttt{b\_array} \gets b_5(x)$
+            \For{$i \gets 1$ to $n$}                    
+                \State $\texttt{candidate} \gets \texttt{b\_array}$
+                \State $\texttt{candidate}[i] = \texttt{candidate}[i] \oplus 1$ \Comment{$\oplus$ is xor operator}
+                \If{$d(\texttt{candidate})$ is better than $rv$}
+                    \State $rv = d(\texttt{candidate})$
+                \EndIf
+            \EndFor
+            \State \Return $rv$
+        \EndFunction
+        \end{algorithmic}
+        \end{algorithm}
+        
+    \item Let max\_improvement($x$), a function that returns the basin of attraction of $x$.
+    
+        \begin{algorithm}
+        \caption{Max Improvement}\label{alg:cap}
+        \begin{algorithmic}
+        \Require $\texttt{impr\_func} \in \{\texttt{first\_improvement}, \texttt{best\_improvement}\}$
+        \Function{max\_improvement}{x}
+            \State $\texttt{next} \gets x$
+            \While{$\texttt{next} \neq x$}
+                \State $x \gets \texttt{next}$
+                \State $\texttt{next} \gets \texttt{impr\_func(next)}$
+            \EndWhile
+            \State \Return $x$
+        \EndFunction
+        \end{algorithmic}
+        \end{algorithm}
+        
+    \item Let steps\_improvement($x$), a function that return the number of iterations of max\_improvement
+
+\end{itemize}
+
+\newpage
+\subsection{Describe Comparison Method}
+The strategies will be compared using:
+\begin{itemize}
+    \item function $f(x)$, where $x \in [0, 31]$
+    \item $n = 5$
+\end{itemize}
+
+Every strategy of obtaining global maxima using Hill Climbing will be characterised by:
+\begin{itemize}
+    \item \textbf{maximum} value of steps\_improvement(x)
+    \item \textbf{average} value of steps\_improvement(x)
+    \item the \textbf{chance} of max\_improvement(x) to be the global optima
+\end{itemize}
+\textbf{Hypotheses:}
+\begin{enumerate}
+    \item First Improvement that uses Big Endian has a smaller average value of steps\_improvement(x) compared to the one that uses Little Endian
+    \item Best Improvement has a smaller maximum value of steps\_improvement(x) and a bigger chance of getting the global maximum compared to any First Improvement strategy.
+\end{enumerate}
+
+
+\newpage
+\section{Basin of Attraction}
+\subsection{First Improvement Big Endian}
+\begin{figure}[H]
+    \tikzfig{graphs/fi_be}
+\end{figure}
+\begin{figure}[H]
+    \fitnessFunction{"data/fi_be.dat"}
+    \caption{First Improvement Big Endian - Basin of Attraction}
+\end{figure}
+
+\subsection{First Improvement Little Endian}
+\begin{figure}[H]
+    \tikzfig{graphs/fi_le}
+\end{figure}
+\begin{figure}[H]
+    \fitnessFunction{"data/fi_le.dat"}
+    \caption{First Improvement Little Endian - Basin of Attraction}
+\end{figure}
+
+\subsection{Best Improvement}
+\begin{figure}[H]
+    \tikzfig{graphs/bi}
+\end{figure}
+\begin{figure}[H]
+    \fitnessFunction{"data/bi.dat"}
+    \caption{Best Improvement - Basin of Attraction}
+\end{figure}
+
+\newpage
+\section{Characterisation}
+\subsection{First Improvement Big Endian}
+\begin{itemize}
+    \item \textbf{maximum} value of steps\_improvement(x) is $5$ for $x = 21$
+    \item \textbf{average} value of steps\_improvement(x) is $1.75$
+    \item the \textbf{chance} of max\_improvement(x) to be the global optima is $43.75\%$ 
+\end{itemize}
+
+
+\subsection{First Improvement Little Endian}
+\begin{itemize}
+    \item \textbf{maximum} value of steps\_improvement(x) is $5$ for $x = 30$
+    \item \textbf{average} value of steps\_improvement(x) is $1.75$
+    \item the \textbf{chance} of max\_improvement(x) to be the global optima is $12.15\%$ 
+\end{itemize}
+
+\subsection{Best Improvement}
+\begin{itemize}
+    \item \textbf{maximum} value of steps\_improvement(x) is $5$ for $x = 21$
+    \item \textbf{average} value of steps\_improvement(x) is $1.71875$
+    \item the \textbf{chance} of max\_improvement(x) to be the global optima is $62.5\%$ 
+\end{itemize}
+
+\newpage
+\section{Conclusion}
+
+\begin{enumerate}
+    \item \textit{"First Improvement that uses Big Endian has a smaller average value of steps\_improvement(x) compared to the one that uses Little Endian"}
+    
+    \textbf{Conclusion:} The hypothesis is false, at least for this case.
+    
+    \textbf{Correction:} Both strategies have an average of 1.75. First Improvement Big Endian has a bigger chance of achieving global maxima.
+    
+    \item \textit{"Best Improvement has a smaller maximum value of steps\_improvement(x) and a bigger chance of getting the global maximum compared to any First Improvement strategy"}
+    
+    \textbf{Conclusion:} The hypothesis is false, at least for this case.
+    
+    \textbf{Correction:} Both strategies have the same maximum value of steps\_improvement(x). Best Improvement has a bigger chance of achieving global maxima.
+\end{enumerate}
+
+\bigskip
+
+As the result, it was established that Best Improvement does show the best result for each characteristic, which indicates that it is the best possible strategy in this scenario. 
+
+
+\bibliographystyle{ieeetr}
+\bibliography{sample}
+
+\end{document}
