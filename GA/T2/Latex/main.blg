@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: alpha.bst
+Reallocating 'name_of_file' (item size: 1) to 7 items.
+Database file #1: sample.bib
+Warning--entry type for "jamesmccaffrey" isn't style-file defined
+--line 84 of file sample.bib
+Warning--entry type for "researchgate" isn't style-file defined
+--line 90 of file sample.bib
+Warning--entry type for "wikiRastrigin" isn't style-file defined
+--line 96 of file sample.bib
+Warning--entry type for "HCSAME" isn't style-file defined
+--line 102 of file sample.bib
+Warning--empty journal in deJong
+You've used 12 entries,
+            2543 wiz_defined-function locations,
+            625 strings with 6183 characters,
+and the built_in function-call counts, 3698 in all, are:
+= -- 349
+> -- 141
+< -- 9
++ -- 46
+- -- 42
+* -- 215
+:= -- 616
+add.period$ -- 35
+call.type$ -- 12
+change.case$ -- 62
+chr.to.int$ -- 12
+cite$ -- 13
+duplicate$ -- 159
+empty$ -- 308
+format.name$ -- 62
+if$ -- 750
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 10
+newline$ -- 62
+num.names$ -- 36
+pop$ -- 96
+preamble$ -- 1
+purify$ -- 77
+quote$ -- 0
+skip$ -- 131
+stack$ -- 0
+substring$ -- 150
+swap$ -- 11
+text.length$ -- 9
+text.prefix$ -- 8
+top$ -- 0
+type$ -- 84
+warning$ -- 1
+while$ -- 32
+width$ -- 15
+write$ -- 143
+(There were 5 warnings)

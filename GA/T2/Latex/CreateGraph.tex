@@ -1,0 +1,117 @@
+
+\pgfplotsset{select coords between index/.style 2 args={
+    x filter/.code={
+        \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+        \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+    }
+}}
+
+\pgfplotscreateplotcyclelist{myCycleMarked}{%
+colorData3,every mark/.append style={mark size=3pt},mark=otimes*\\%
+colorData1,every mark/.append style={mark size=4pt, line width=2pt},mark=+\\%
+colorData2,every mark/.append style={mark size=4pt},mark=triangle*\\%
+colorData5,every mark/.append style={mark size=3pt},mark=square*\\%
+}
+
+\newcommand{\lineSize}{2.2pt}
+
+\pgfplotscreateplotcyclelist{myCycle}{%
+colorData3, line width=\lineSize\\%
+colorData1, line width=\lineSize\\%
+colorData2, line width=\lineSize\\%
+colorData5, line width=\lineSize\\%
+}
+
+\usepackage{ifthen}
+
+\newcommand{\CreateGraph}[4]{
+\ReadFile{\info}{#1/testInfo.dat}
+
+\begin{figure}[H]
+
+    \begin{tikzpicture}
+    \begin{axis}[
+        title = First Generations,
+        xlabel = {Generation},
+        ylabel = {Best Individual},
+        axis lines=left,
+        width=15cm,
+        height=10cm,
+        cycle list name= myCycle 
+    ]
+
+    \addplot table [x=gen, y=val, col sep=comma, select coords between index={1}{#2}] {#1/run1.csv};
+    \addlegendentry{1 Point};
+    
+    \addplot table [x=gen, y=val, col sep=comma, select coords between index={1}{#2}] {#1/run2.csv};
+    \addlegendentry{2 Points};
+   
+    \addplot table [x=gen, y=val, col sep=comma, select coords between index={1}{#2}] {#1/run3.csv};
+    \addlegendentry{3 Points};
+    
+    \addplot table [x=gen, y=val, col sep=comma, select coords between index={1}{#2}] {#1/run4.csv};
+    \addlegendentry{4 Points};
+    
+    \end{axis}
+    \end{tikzpicture}
+    
+    \lSpace
+
+    \begin{tikzpicture}
+    \begin{axis} [
+        title = The Mean \& The Confidence Interval,
+        xlabel = {Minima Found},
+        ylabel = {Points},
+        axis lines=left,
+        width=15cm,
+        height=5cm,
+        cycle list name=myCycle,
+        ytick={1,2,...,4},
+        ymin=0,
+        ymax=5,
+        xtick distance=#3,
+        enlarge x limits=#4
+    ]
+    \foreach \c in {1,...,4}
+    {
+    \ReadFile{\resultValues}{#1/info\c.dat}
+    \addplot+[only marks,
+      error bars/.cd,
+        x dir=both,
+        x explicit,
+        error mark options={
+          rotate=90,
+          mark size=6pt,
+          line width=2pt
+        }
+    ]
+    coordinates {
+    (\resultValues{2}, \c) +- (1.645*\resultValues{5}, 0)
+    };
+    }
+    
+    \end{axis} 
+    \end{tikzpicture}
+
+    \lSpace
+    
+    \ReadFile{\resulta}{#1/info1.dat}
+    \ReadFile{\resultb}{#1/info2.dat}
+    \ReadFile{\resultc}{#1/info3.dat}
+    \ReadFile{\resultd}{#1/info4.dat}
+    
+    \begin{table}[H]
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+             & Mean      & MOE       & Best      & Worst     \\ \hline
+    1 Point  & \resulta{2} & \resulta{5} & \resulta{8} & \resulta{11} \\ \hline
+    2 Points & \resultb{2} & \resultb{5} & \resultb{8} & \resultb{11} \\ \hline
+    3 Points & \resultc{2} & \resultc{5} & \resultc{8} & \resultc{11} \\ \hline
+    4 Points & \resultd{2} & \resultd{5} & \resultd{8} & \resultd{11} \\ \hline
+    \end{tabular}
+    \end{table}
+
+\caption{\info{1}}
+  
+\end{figure}
+}

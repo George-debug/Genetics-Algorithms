@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\genetic_representation">
+      <UniqueIdentifier>{07cc27f6-faea-4bfd-ae33-e084594acf56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Selection">
+      <UniqueIdentifier>{d5fa0ef5-5f36-40de-8e3e-8673c97f7f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Crossover">
+      <UniqueIdentifier>{bea5f614-fe9c-4030-8e86-70c7cc49e87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FunctionAnalysis">
+      <UniqueIdentifier>{19b4d002-6786-4e83-95eb-91b6980c8764}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Selector.cpp">
+      <Filter>Header Files\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="runInfo.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossover.cpp">
+      <Filter>Header Files\Crossover</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossoverKPoint.cpp">
+      <Filter>Header Files\Crossover</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithm.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectorRouletteWheel.cpp">
+      <Filter>Header Files\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="Analysis.cpp">
+      <Filter>Header Files\FunctionAnalysis</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="details.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryChromosome.h">
+      <Filter>Header Files\genetic_representation</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneticAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="runInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.h">
+      <Filter>Header Files\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="Crossover.h">
+      <Filter>Header Files\Crossover</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossoverKPoint.h">
+      <Filter>Header Files\Crossover</Filter>
+    </ClInclude>
+    <ClInclude Include="Analysis.h">
+      <Filter>Header Files\FunctionAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectorRouletteWheel.h">
+      <Filter>Header Files\Selection</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
